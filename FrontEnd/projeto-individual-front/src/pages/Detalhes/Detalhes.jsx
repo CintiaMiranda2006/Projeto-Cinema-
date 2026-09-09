@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
-import { buscarFilmePorId } from "../../services/filmeService";
+import {
+  buscarFilmePorId,
+  excluirFilme
+} from "../../services/filmeService";
 
 function Detalhes() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [filme, setFilme] = useState(null);
   const [erro, setErro] = useState("");
@@ -23,6 +27,16 @@ function Detalhes() {
     carregarFilme();
   }, [id]);
 
+  async function deletarFilme() {
+    try {
+      await excluirFilme(id);
+      navigate("/");
+    } catch (erro) {
+      console.error(erro);
+      setErro(erro.message);
+    }
+  }
+
   return (
     <div>
       <Header />
@@ -40,7 +54,14 @@ function Detalhes() {
           <p>Classificação: {filme.classificacao}</p>
           <p>Sinopse: {filme.sinopse}</p>
 
+          <button onClick={deletarFilme}>
+            Excluir filme
+          </button>
+
           <Link to="/">Voltar</Link>
+          <Link to={`/filmes/${id}/editar`}>
+            Editar filme
+          </Link>
         </div>
       )}
     </div>

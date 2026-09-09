@@ -110,8 +110,11 @@ public class FilmeController {
         return ps;
     },keyHolder);
 
-    Integer idInserido = keyHolder.getKeyAs(Integer.class);
-    filme.setId(idInserido);
+    Number chaveGerada = keyHolder.getKey();
+
+    if (chaveGerada != null) {
+            filme.setId(chaveGerada.intValue());
+        }
 
     return ResponseEntity.status(201).body(filme);
 
@@ -176,6 +179,25 @@ public class FilmeController {
         filme.setId(id);
 
         return ResponseEntity.status(200).body(filme);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(
+            @PathVariable Integer id
+    ) {
+        if (!existePorId(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        String sql = """
+            DELETE FROM filmes
+            WHERE id = ?
+            """;
+
+        jdbcTemplate.update(sql, id);
+
+        return ResponseEntity.noContent().build();
     }
 
 }
