@@ -1,0 +1,101 @@
+.container {
+  min-height: 100vh;
+  background-color: #171717;
+  color: #f2f2f2;
+}
+
+.conteudo {
+  width: 900px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.cardDetalhes {
+  background-color: #821919;
+  border: 1px solid #212121;
+  border-radius: 12px;
+  padding: 32px;
+}
+
+.titulo {
+  margin: 0 0 24px;
+  font-size: 32px;
+  text-align: center;
+}
+
+.informacao {
+  margin: 12px 0;
+  font-size: 17px;
+  color: #f8f8f8;
+}
+
+.sinopse {
+  margin-top: 20px;
+  line-height: 1.6;
+  font-size: 17px;
+  color: #f8f8f8;
+}
+
+.acoes {
+  display: flex;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.botaoEditar {
+  display: inline-block;
+  padding: 10px 16px;
+
+  background-color: #ececec;
+  color: #171717;
+
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.botaoEditar:hover {
+  opacity: 0.85;
+}
+
+.botaoExcluir {
+  padding: 10px 16px;
+
+  background-color: #571616;
+  color: #f8f7f7;
+
+  border: 1px solid #5f2121;
+  border-radius: 6px;
+
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.botaoExcluir:hover {
+  background-color: #a74343;
+}
+
+.botaoVoltar {
+  display: inline-block;
+  padding: 10px 16px;
+
+  background-color: #3e3e3e;
+  color: #f2f2f2;
+
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.botaoVoltar:hover {
+  background-color: #868686;
+}
+
+.mensagemErro {
+  background-color: #722626;
+  border: 1px solid #8b2e2e;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}

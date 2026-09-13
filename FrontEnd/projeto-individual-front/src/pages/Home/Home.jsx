@@ -1,3 +1,4 @@
+import styles from "./Home.module.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
@@ -22,27 +23,51 @@ function Home() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <Header />
 
-      <h1>Filmes</h1>
+      <main className={styles.conteudo}>
+        <h1 className={styles.titulo}>Filmes</h1>
 
-      {erro && <p>{erro}</p>}
+        {erro && (
+          <p className={styles.mensagemErro}>
+            {erro}
+          </p>
+        )}
 
-      {filmes.map((filme) => (
-        <div key={filme.id}>
-          <h2>{filme.titulo}</h2>
-          <p>Gênero: {filme.genero}</p>
-          <p>Diretor: {filme.diretor}</p>
+        {filmes.length === 0 && !erro && (
+          <p className={styles.semFilmes}>
+            Nenhum filme cadastrado.
+          </p>
+        )}
 
-          <Link to={`/filmes/${filme.id}`}>
-            Ver detalhes
-          </Link>
+        <div className={styles.listaFilmes}>
+          {filmes.map((filme) => (
+            <div className={styles.card} key={filme.id}>
+              <h2 className={styles.cardTitulo}>
+                {filme.titulo}
+              </h2>
+
+              <p className={styles.informacao}>
+                Gênero: {filme.genero}
+              </p>
+
+              <p className={styles.informacao}>
+                Diretor: {filme.diretor}
+              </p>
+
+              <Link
+                className={styles.linkDetalhes}
+                to={`/filmes/${filme.id}`}
+              >
+                Ver detalhes
+              </Link>
+            </div>
+          ))}
         </div>
-      ))}
+      </main>
     </div>
   );
 }
-
 
 export default Home;

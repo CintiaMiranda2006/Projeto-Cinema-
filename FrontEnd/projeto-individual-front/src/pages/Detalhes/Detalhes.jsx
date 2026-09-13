@@ -5,6 +5,7 @@ import {
   buscarFilmePorId,
   excluirFilme
 } from "../../services/filmeService";
+import styles from "./Detalhes.module.css";
 
 function Detalhes() {
   const { id } = useParams();
@@ -38,32 +39,71 @@ function Detalhes() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <Header />
 
-      {erro && <p>{erro}</p>}
+      <main className={styles.conteudo}>
+        {erro && (
+          <p className={styles.mensagemErro}>
+            {erro}
+          </p>
+        )}
 
-      {filme && (
-        <div>
-          <h1>{filme.titulo}</h1>
+        {filme && (
+          <div className={styles.cardDetalhes}>
+            <h1 className={styles.titulo}>
+              {filme.titulo}
+            </h1>
 
-          <p>Gênero: {filme.genero}</p>
-          <p>Diretor: {filme.diretor}</p>
-          <p>Ano: {filme.ano}</p>
-          <p>Duração: {filme.duracao} minutos</p>
-          <p>Classificação: {filme.classificacao}</p>
-          <p>Sinopse: {filme.sinopse}</p>
+            <p className={styles.informacao}>
+              Gênero: {filme.genero}
+            </p>
 
-          <button onClick={deletarFilme}>
-            Excluir filme
-          </button>
+            <p className={styles.informacao}>
+              Diretor: {filme.diretor}
+            </p>
 
-          <Link to="/">Voltar</Link>
-          <Link to={`/filmes/${id}/editar`}>
-            Editar filme
-          </Link>
-        </div>
-      )}
+            <p className={styles.informacao}>
+              Ano: {filme.ano}
+            </p>
+
+            <p className={styles.informacao}>
+              Duração: {filme.duracao} minutos
+            </p>
+
+            <p className={styles.informacao}>
+              Classificação: {filme.classificacao}
+            </p>
+
+            <p className={styles.sinopse}>
+              Sinopse: {filme.sinopse}
+            </p>
+
+            <div className={styles.acoes}>
+              <Link
+                className={styles.botaoVoltar}
+                to="/"
+              >
+                Voltar
+              </Link>
+
+              <Link
+                className={styles.botaoEditar}
+                to={`/filmes/${id}/editar`}
+              >
+                Editar filme
+              </Link>
+
+              <button
+                className={styles.botaoExcluir}
+                onClick={deletarFilme}
+              >
+                Excluir filme
+              </button>
+            </div>
+          </div>
+        )}
+      </main>
     </div>
   );
 }

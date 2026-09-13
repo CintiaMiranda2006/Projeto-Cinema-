@@ -4,7 +4,7 @@ import styles from "./Header.module.css";
 function Header() {
   return (
     <header className={styles.header}>
-      <h2>Projeto Cinema</h2>
+      <h2>Lista de Filmes</h2>
 
       <nav className={styles.nav}>
         <Link to="/">Home</Link>

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import {
   buscarFilmePorId,
   atualizarFilme
 } from "../../services/filmeService";
+import styles from "./Editar.module.css";
 
 function Editar() {
   const { id } = useParams();
@@ -62,75 +63,119 @@ function Editar() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <Header />
 
-      <h1>Editar Filme</h1>
+      <main className={styles.conteudo}>
+        <h1 className={styles.titulo}>Editar Filme</h1>
 
-      {erro && <p>{erro}</p>}
+        {erro && (
+          <p className={styles.mensagemErro}>
+            {erro}
+          </p>
+        )}
 
-      <form onSubmit={enviarFormulario}>
-        <input
-          name="titulo"
-          value={filme.titulo}
-          onChange={alterarCampo}
-          placeholder="Título"
-        />
+        <form className={styles.formulario} onSubmit={enviarFormulario}>
+          <div className={styles.campo}>
+            <label className={styles.label}>Título</label>
+            <input
+              className={styles.input}
+              name="titulo"
+              value={filme.titulo}
+              onChange={alterarCampo}
+              placeholder="Título"
+            />
+          </div>
 
-        <input
-          name="genero"
-          value={filme.genero}
-          onChange={alterarCampo}
-          placeholder="Gênero"
-        />
+          <div className={styles.campo}>
+            <label className={styles.label}>Gênero</label>
+            <input
+              className={styles.input}
+              name="genero"
+              value={filme.genero}
+              onChange={alterarCampo}
+              placeholder="Gênero"
+            />
+          </div>
 
-        <input
-          name="diretor"
-          value={filme.diretor}
-          onChange={alterarCampo}
-          placeholder="Diretor"
-        />
+          <div className={styles.campo}>
+            <label className={styles.label}>Diretor</label>
+            <input
+              className={styles.input}
+              name="diretor"
+              value={filme.diretor}
+              onChange={alterarCampo}
+              placeholder="Diretor"
+            />
+          </div>
 
-        <input
-          name="ano"
-          type="number"
-          value={filme.ano}
-          onChange={alterarCampo}
-          placeholder="Ano"
-        />
+          <div className={styles.campo}>
+            <label className={styles.label}>Ano</label>
+            <input
+              className={styles.input}
+              name="ano"
+              type="number"
+              value={filme.ano}
+              onChange={alterarCampo}
+              placeholder="Ano"
+            />
+          </div>
 
-        <input
-          name="duracao"
-          type="number"
-          value={filme.duracao}
-          onChange={alterarCampo}
-          placeholder="Duração"
-        />
+          <div className={styles.campo}>
+            <label className={styles.label}>Duração</label>
+            <input
+              className={styles.input}
+              name="duracao"
+              type="number"
+              value={filme.duracao}
+              onChange={alterarCampo}
+              placeholder="Duração"
+            />
+          </div>
 
-        <select
-          name="classificacao"
-          value={filme.classificacao}
-          onChange={alterarCampo}
-        >
-          <option value="0">Livre</option>
-          <option value="10">10 anos</option>
-          <option value="12">12 anos</option>
-          <option value="14">14 anos</option>
-          <option value="16">16 anos</option>
-          <option value="18">18 anos</option>
-        </select>
+          <div className={styles.campo}>
+            <label className={styles.label}>Classificação</label>
+            <select
+              className={styles.select}
+              name="classificacao"
+              value={filme.classificacao}
+              onChange={alterarCampo}
+            >
+              <option value="0">Livre</option>
+              <option value="10">10 anos</option>
+              <option value="12">12 anos</option>
+              <option value="14">14 anos</option>
+              <option value="16">16 anos</option>
+              <option value="18">18 anos</option>
+            </select>
+          </div>
 
-        <textarea
-          name="sinopse"
-          value={filme.sinopse}
-          onChange={alterarCampo}
-          placeholder="Sinopse"
-        />
+          <div className={styles.campo}>
+            <label className={styles.label}>Sinopse</label>
+            <textarea
+              className={styles.textarea}
+              name="sinopse"
+              value={filme.sinopse}
+              onChange={alterarCampo}
+              placeholder="Sinopse"
+            />
+          </div>
 
-        <button type="submit">
-          Salvar alterações
-        </button>
-      </form>
+          <button
+            className={styles.botaoSalvar}
+            type="submit"
+          >
+            Salvar alterações
+          </button>
+
+          <Link
+            className={styles.botaoCancelar}
+            to={`/filmes/${id}`}
+          >
+            Cancelar
+          </Link>
+        </form>
+      </main>
     </div>
   );
 }
